@@ -1,7 +1,5 @@
 package reversi;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * Board
  * Classe gérant le plateau de jeu
@@ -9,42 +7,56 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Board {
 	private Piece[][] mPlaces;
 	
+	/**
+	 * Constructeur
+	 * @param rows
+	 * @param columns
+	 */
 	public Board(int rows, int columns) {
-		if(rows <= 0 || columns <= 0)
+		if(rows < 0 || columns < 0)
 			throw new IllegalArgumentException("Rows or collumns cannot be less or equal than 0");
 		
 		mPlaces = new Piece[rows][columns];
 	}
 	
 	/**
-	 * Initialize le plateau dans son état initial
-	 */
-	public void initialize() {
-		this.addPiece(4, 4, Piece.Color.White);
-		this.addPiece(4, 5, Piece.Color.Black);
-		this.addPiece(5, 4, Piece.Color.Black);
-		this.addPiece(5, 5, Piece.Color.White);
-	}
-	
-	/**
 	 * Ajouter une pièce au plateau à la position [row, column]
 	 */
 	public boolean addPiece(int row, int column, Piece.Color c) {
-		// on vérifie que la position donnée existe
-		if(row <= 0)
+		checkCoordinatesInput(row, column);
+		
+		mPlaces[row][column] = new Piece(c);
+		return true;
+	}
+	
+	/**
+	 * Renvoie l'instance de pièce à la position demandée
+	 * @param row
+	 * @param column
+	 * @return
+	 */
+	public Piece getPiece(int row, int column) {
+		checkCoordinatesInput(row, column);
+		
+		return mPlaces[row][column];
+	}
+	
+	/**
+	 * Vérifie que les coordonnées données sont cohérentes
+	 * @param row
+	 * @param column
+	 */
+	private void checkCoordinatesInput(int row, int column) {
+		if(row < 0)
 			throw new IllegalArgumentException("row cannot be negative");
-		if(column <= 0)
+		if(column < 0)
 			throw new IllegalArgumentException("column cannot be negative");
 		
-		if(row > mPlaces.length)
+		if(row >= mPlaces.length)
 			throw new IllegalArgumentException("row cannot be higher than rows board size");
 		
-		if(row > mPlaces[0].length)
+		if(row >= mPlaces[0].length)
 			throw new IllegalArgumentException("column cannot be higher than columns board size");
-		
-		// TODO : on vérifie si la pièce peut être posée à cette position
-		mPlaces[row-1][column-1] = new Piece(c);
-		return true;
 	}
 	
 	/**
@@ -52,13 +64,22 @@ public class Board {
 	 */
 	@Override
 	public String toString() {
-		String ret = "";
+		String ret = "   ";
+		// affiche la ligne avec les coordonnées des colonnes
 		for(int i = 0; i < mPlaces.length; i++) {
+			ret += i + " ";
+		}
+		
+		ret +="\n";
+		
+		// affiche le plateau de jeu et les numéros de ligne
+		for(int i = 0; i < mPlaces.length; i++) {
+			ret += i + " ";
 			for(int j = 0; j < mPlaces[0].length; j++) {
 				if(mPlaces[i][j] == null) {
 					ret += " -";
 				} else {
-					ret += " " + (mPlaces[i][j].getColor() == Piece.Color.White ? "O" : "X");
+					ret += " " + mPlaces[i][j].toString();
 				}
 			}
 			ret += "\n";

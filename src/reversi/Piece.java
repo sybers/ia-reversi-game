@@ -31,4 +31,12 @@ public class Piece {
 	public void flip() {
 		mColor = (mColor == Color.White) ? Color.Black : Color.White;
 	}
+	
+	/**
+	 * Affiche un charactère différent en fonction de la couleur de la pièce
+	 */
+	@Override
+	public String toString() {
+		return mColor == Color.White ? "●" : "○";
+	}
 }
