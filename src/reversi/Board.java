@@ -9,8 +9,8 @@ public class Board {
 	
 	/**
 	 * Constructeur
-	 * @param rows
-	 * @param columns
+	 * @param rows nombre de lignes
+	 * @param columns nombre de colonnes
 	 */
 	public Board(int rows, int columns) {
 		if(rows < 0 || columns < 0)
@@ -39,10 +39,12 @@ public class Board {
 	 * Ajouter une pièce au plateau à la position [row, column]
 	 */
 	public boolean addPiece(int row, int column, Piece.Color c) {
-		checkCoordinatesInput(row, column);
-		
-		mPlaces[row][column] = new Piece(c);
-		return true;
+		if(!checkCoordinatesInput(row, column)) {
+			return false;
+		} else {
+			mPlaces[row][column] = new Piece(c);
+			return true;
+		}
 	}
 	
 	/**
@@ -52,9 +54,11 @@ public class Board {
 	 * @return Pièce à la position spécifiée
 	 */
 	public Piece getPiece(int row, int column) {
-		checkCoordinatesInput(row, column);
-		
-		return mPlaces[row][column];
+		if(!checkCoordinatesInput(row, column)){
+			return null;
+		} else {
+			return mPlaces[row][column];
+		}
 	}
 	
 	/**
@@ -62,17 +66,11 @@ public class Board {
 	 * @param row numéro de la ligne
 	 * @param column numéro de la colonne
 	 */
-	private void checkCoordinatesInput(int row, int column) {
-		if(row < 0)
-			throw new IllegalArgumentException("row cannot be less than 0");
-		if(column < 0)
-			throw new IllegalArgumentException("column cannot be less than 0");
-		
-		if(row >= mPlaces.length)
-			throw new IllegalArgumentException("row cannot be higher than rows board size");
-		
-		if(row >= mPlaces[0].length)
-			throw new IllegalArgumentException("column cannot be higher than columns board size");
+	private boolean checkCoordinatesInput(int row, int column) {
+		if(row < 0 || column < 0 || row >= mPlaces.length || column >= mPlaces[0].length)
+			return false;
+		else
+			return true;
 	}
 	
 	/**
