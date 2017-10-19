@@ -18,6 +18,8 @@ public class HumanPlayer extends AbstractPlayer {
         int row;
         int column;
 
+        System.out.println(game.toString());
+
         System.out.println("Entrez la colonne :");
         column = mScanner.nextInt();
 
