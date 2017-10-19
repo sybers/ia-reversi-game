@@ -20,6 +20,22 @@ public class Board {
 	}
 	
 	/**
+	 * Retourne le nombre de lignes du plateau
+	 * @return nombre de lignes
+	 */
+	public int getRows() {
+		return mPlaces.length;
+	}
+	
+	/**
+	 * Retourne le nombre de colonnes du plateau
+	 * @return nombre de colonnes
+	 */
+	public int getColumns() {
+		return mPlaces[0].length;
+	}
+	
+	/**
 	 * Ajouter une pièce au plateau à la position [row, column]
 	 */
 	public boolean addPiece(int row, int column, Piece.Color c) {
@@ -31,9 +47,9 @@ public class Board {
 	
 	/**
 	 * Renvoie l'instance de pièce à la position demandée
-	 * @param row
-	 * @param column
-	 * @return
+	 * @param row numéro de ligne
+	 * @param column numéro de colonne
+	 * @return Pièce à la position spécifiée
 	 */
 	public Piece getPiece(int row, int column) {
 		checkCoordinatesInput(row, column);
@@ -43,8 +59,8 @@ public class Board {
 	
 	/**
 	 * Vérifie que les coordonnées données sont cohérentes
-	 * @param row
-	 * @param column
+	 * @param row numéro de la ligne
+	 * @param column numéro de la colonne
 	 */
 	private void checkCoordinatesInput(int row, int column) {
 		if(row < 0)

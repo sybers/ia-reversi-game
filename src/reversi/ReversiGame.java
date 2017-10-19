@@ -8,41 +8,77 @@ import java.util.Scanner;
  */
 public final class ReversiGame {
 	// taille du plateau
-	private final static int ROWS = 8;
-	private final static int COLUMNS = 8;
+	private final static int ROWS = 3;
+	private final static int COLUMNS = 3;
 	
 	// offsets pour les directions
 	private final static int[] mOffsetsRows = 	{-1, -1, -1, 0, 1, 1,  1,  0};
 	private final static int[] mOffsetsColumns = {-1,  0,  1, 1, 1, 0, -1, -1};
-	
+
+	private AbstractPlayer mPlayer1;
+	private AbstractPlayer mPlayer2;
+
+	private boolean mIsBlackTurn = false; // par défaut : joueur 1 -> blanc, joueur 2 -> noir
+
+	// plateau de jeu
 	private Board mBoard;
-	private Scanner mScanner = new Scanner(System.in);
 	
 	/**
 	 * Constructeur
 	 */
-	public ReversiGame() {
+	public ReversiGame(AbstractPlayer player1, AbstractPlayer player2) {
+		if(player1 == null || player2 == null)
+			throw new IllegalArgumentException("player1 and player 2 must not be null values");
+
+		mPlayer1 = player1;
+		mPlayer2 = player2;
+
 		mBoard = new Board(ROWS, COLUMNS);
 		initializeBoard();
 	}
 	
 	/**
 	 * Initialize le plateau avec les pièces de départ
+	 * et attribue les scores correspondants aux deux joueurs
 	 */
 	public void initializeBoard() {
 		int middleRow = (int) Math.ceil(ROWS/2);
 		int middleColumn = (int) Math.ceil(COLUMNS/2);
-		
+
+		// pièces du joueur blanc
 		this.mBoard.addPiece(middleRow - 1, middleColumn - 1, Piece.Color.White);
+		this.mBoard.addPiece(middleRow    , middleColumn	   , Piece.Color.White);
+
+		// pièces du joueur noir
 		this.mBoard.addPiece(middleRow - 1, middleColumn    , Piece.Color.Black);
 		this.mBoard.addPiece(middleRow    , middleColumn - 1, Piece.Color.Black);
-		this.mBoard.addPiece(middleRow    , middleColumn	   , Piece.Color.White);
+
+		// score par défaut des deux joueurs
+		mPlayer1.setScore(2);
+		mPlayer2.setScore(2);
+	}
+
+	/**
+	 * Commence la boucle du jeu
+	 */
+	public void startGame() {
+		// pour chaque tour
+		while(hasValidMoves((mIsBlackTurn ? Piece.Color.Black : Piece.Color.White ))) {
+			MovePosition attemptedMove;
+
+			// tant que la position donnée n'eest pas un coup possible
+			do {
+				attemptedMove = (mIsBlackTurn ? mPlayer2 : mPlayer1).playTurn(this);
+			} while(isPossibleMove(attemptedMove.getRow(), attemptedMove.getColumn(), (mIsBlackTurn ? Piece.Color.Black : Piece.Color.White )));
+
+			mIsBlackTurn = !mIsBlackTurn;
+
+		}
 	}
 	
 	/**
 	 * Jouer un coup est l'action de poser une pièce sur le plateau
-	 * c'est une action qui est déléguée au joueur courant (humain ou IA) 
-	 * TODO : clean cette fonction et ajouter la délégation aux joueurs (pour l'instant on peut jouer plusieurs fois de suite avec le même joueur)
+	 * c'est une action qui est déléguée au joueur courant (humain ou IA)
 	 */
 	public void setPiece(boolean blackTurn) {
 		int row = -1;
@@ -51,12 +87,6 @@ public final class ReversiGame {
 		
 		while(!possible) {
 			System.out.println("Joueur " + (blackTurn ? "Noir" : "Blanc") + " :");
-			
-			System.out.println("Entrez la colonne :");
-			column = mScanner.nextInt();
-			
-			System.out.println("Entrez la ligne :");
-			row = mScanner.nextInt();
 			
 			possible = isPossibleMove(row, column, blackTurn ? Piece.Color.Black : Piece.Color.White);
 			
@@ -70,10 +100,25 @@ public final class ReversiGame {
 	
 	/**
 	 * Renvoie le plateau de jeu
-	 * @return
+	 * @return plateau de jeu
 	 */
 	public Board getBoard() {
 		return mBoard;
+	}
+	
+	/**
+	 * Vérifie que le plateau contient des mouvements possibles pour la couleur donnée
+	 * @param c couleur à vérifier
+	 * @return vrai si des mouvements sont possibles, faux sinon
+	 */
+	public boolean hasValidMoves(Piece.Color c) {
+		for(int i = 0; i < mBoard.getRows(); i++) {
+			for(int j = 0; j < mBoard.getRows(); j++) {
+				boolean valid = isPossibleMove(i, j, c);
+				if(valid) return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -92,6 +137,10 @@ public final class ReversiGame {
 		// si aucune direction ne fonctionne alors le coup est impossible
 		
 		boolean isValid = false;
+
+		// si il y a déjà une pièce sur cette case, le mouvement est impossible
+		if(mBoard.getPiece(row, column) != null)
+			return isValid;
 		
 		
 		// pour les 8 directions autour de la pièce
@@ -136,16 +185,19 @@ public final class ReversiGame {
 		return isValid;
 	}
 	
+	/**
+	 * Effectue un mouvement à la position donnée sur le plateau
+	 * @param row numéro de ligne
+	 * @param column numéro de colonne
+	 * @param color couleur de la pièce à poser
+	 * @return vrai si le mouvement a été effectué, faux sinon
+	 */
 	private boolean performMove(int row, int column, Piece.Color color) {
-		// si pas de pièces autour de moi ou pas de pièces de la couleur opposée -> direction pas possible
-		// pour chaque piece de la couleur opposée autour, on regarde si une pièce de ma couleur se trouve derrière
-		// si on tombe sur une pièce de la même couleur, on continue une case derrière dans la direction de la recherche
-		// si on trouve une case vide ou si on arrive au bord du plateau -> la direction est invalide
-		
-		// si aucune direction ne fonctionne alors le coup est impossible
-		
 		boolean isValid = false;
-		
+
+		// si il y a déjà une pièce sur cette case, le mouvement est impossible
+		if(mBoard.getPiece(row, column) != null)
+			return isValid;
 		
 		// pour les 8 directions autour de la pièce
 		for(int i=0; i<8; i++) {

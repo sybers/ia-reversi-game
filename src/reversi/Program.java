@@ -3,17 +3,14 @@ package reversi;
 public class Program {
 
 	public static void main(String[] args) {
-		ReversiGame g = new ReversiGame();
+		HumanPlayer player1 = new HumanPlayer();
+		HumanPlayer player2 = new HumanPlayer();
+
+		ReversiGame g = new ReversiGame(player1, player2);
 		
-		System.out.println(g.toString());
+		g.startGame();
 		
-		boolean isBlackTurn = false;
-		
-		while(true) {
-			g.setPiece(isBlackTurn);
-			System.out.println(g.toString());
-			isBlackTurn = !isBlackTurn;
-		}
+		System.out.println("Fin de la partie");
 		
 	}
 
