@@ -48,9 +48,9 @@ public class Board {
 	 */
 	private void checkCoordinatesInput(int row, int column) {
 		if(row < 0)
-			throw new IllegalArgumentException("row cannot be negative");
+			throw new IllegalArgumentException("row cannot be less than 0");
 		if(column < 0)
-			throw new IllegalArgumentException("column cannot be negative");
+			throw new IllegalArgumentException("column cannot be less than 0");
 		
 		if(row >= mPlaces.length)
 			throw new IllegalArgumentException("row cannot be higher than rows board size");
