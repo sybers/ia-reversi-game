@@ -1,7 +1,5 @@
 package reversi;
 
-import java.util.Scanner;
-
 /**
  * Game
  * Classe gérant la logique du jeu
