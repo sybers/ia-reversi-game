@@ -76,6 +76,8 @@ public final class ReversiGame {
 			mIsBlackTurn = !mIsBlackTurn;
 
 		}
+
+		endGame();
 	}
 	
 	/**
@@ -227,8 +229,8 @@ public final class ReversiGame {
 							mPlayer2.decrementScore();
 							mPlayer1.incrementScore();
 						} else {
-							mPlayer2.decrementScore();
-							mPlayer1.incrementScore();
+							mPlayer2.incrementScore();
+							mPlayer1.decrementScore();
 						}
 						
 						// on passe à la pièce suivante
@@ -245,6 +247,17 @@ public final class ReversiGame {
 		}
 		
 		return isValid;
+	}
+
+	/**
+	 * Méthode appelée lorsque la partie est terminée
+	 * Pour récapituler les scores et afficher le gagnant
+	 */
+	private void endGame() {
+		int p1Score = mPlayer1.getScore();
+		int p2Score = mPlayer2.getScore();
+
+		System.out.println("Blanc ->" + p1Score + " | Noir -> " + p2Score);
 	}
 	
 	/**
