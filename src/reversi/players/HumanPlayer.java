@@ -23,20 +23,25 @@ public class HumanPlayer extends AbstractPlayer {
 
         System.out.println(game.toString());
 
-        System.out.println("Entrez la colonne :");
-        column = mScanner.nextInt();
+        column = getValueFromInput("Entrez la colonne :");
 
-        System.out.println("Entrez la ligne :");
-        row = mScanner.nextInt();
+        row = getValueFromInput("Entrez la ligne :");
 
         return new MovePosition(row, column);
     }
 
     /**
-     *
-     * @return
+     * @return int value
      */
-    private int getValueFromInput() {
+    private int getValueFromInput(String message) {
+        System.out.println(message);
 
+        // On tente d'obtenir un entier
+        while(!mScanner.hasNextInt()) {
+            mScanner.next();
+            System.out.println("Entrez un nombre valide...");
+        }
+
+        return mScanner.nextInt();
     }
 }
