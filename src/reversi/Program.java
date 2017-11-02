@@ -1,5 +1,7 @@
 package reversi;
 
+import reversi.players.HumanPlayer;
+
 public class Program {
 
 	public static void main(String[] args) {

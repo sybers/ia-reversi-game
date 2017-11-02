@@ -1,4 +1,7 @@
-package reversi;
+package reversi.players;
+
+import reversi.MovePosition;
+import reversi.ReversiGame;
 
 public abstract class AbstractPlayer {
     public int mScore;

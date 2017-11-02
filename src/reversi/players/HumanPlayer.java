@@ -1,4 +1,7 @@
-package reversi;
+package reversi.players;
+
+import reversi.MovePosition;
+import reversi.ReversiGame;
 
 import java.util.Scanner;
 
@@ -27,5 +30,13 @@ public class HumanPlayer extends AbstractPlayer {
         row = mScanner.nextInt();
 
         return new MovePosition(row, column);
+    }
+
+    /**
+     *
+     * @return
+     */
+    private int getValueFromInput() {
+
     }
 }
