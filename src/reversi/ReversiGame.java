@@ -285,8 +285,10 @@ public final class ReversiGame {
 	 */
 	@Override
 	public String toString() {
-		System.out.println("Tour du joueur " + (mIsBlackTurn ? "Noir" : "Blanc"));
-		System.out.println("Blanc ->" + mPlayer1.getScore() + " | Noir -> " + mPlayer2.getScore());
-		return mBoard.toString();
+		String ret = "";
+		ret += "Tour du joueur " + (mIsBlackTurn ? "Noir" : "Blanc") + "\n";
+		ret += "Blanc ->" + mPlayer1.getScore() + " | Noir -> " + mPlayer2.getScore() + "\n";
+		ret += mBoard.toString();
+		return ret;
 	}
 }

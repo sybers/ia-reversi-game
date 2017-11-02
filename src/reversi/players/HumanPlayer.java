@@ -31,6 +31,7 @@ public class HumanPlayer extends AbstractPlayer {
     }
 
     /**
+     * Permet de récupérer un entier depuis le périphérique d'entrée par défaut
      * @return int value
      */
     private int getValueFromInput(String message) {
