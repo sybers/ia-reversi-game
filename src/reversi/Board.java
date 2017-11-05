@@ -18,6 +18,33 @@ public class Board {
 		
 		mPlaces = new Piece[rows][columns];
 	}
+
+
+    /**
+     * Constructeur par recopie
+     * @param other
+     */
+    public Board(Board other) {
+        if(other == null)
+            throw new IllegalArgumentException("Cannot create copy object from null value");
+
+        // on créée le plateau de jeu avec la même taille
+        int rows = other.mPlaces.length;
+        int columns = other.mPlaces[0].length;
+
+        mPlaces = new Piece[rows][columns];
+
+        // initialise le plateau avec les pièces de l'autre
+        for(int i = 0; i < mPlaces.length; i++) {
+            for(int j = 0; j < mPlaces[0].length; j++) {
+                if(other.mPlaces[i][j] == null) {
+                    mPlaces[i][j] = null;
+                } else {
+                    mPlaces[i][j] = new Piece(other.mPlaces[i][j].getColor());
+                }
+            }
+        }
+	}
 	
 	/**
 	 * Retourne le nombre de lignes du plateau

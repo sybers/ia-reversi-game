@@ -2,6 +2,9 @@ package reversi;
 
 import reversi.players.AbstractPlayer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Game
  * Classe gérant la logique du jeu
@@ -15,8 +18,8 @@ public final class ReversiGame {
 	private final static int[] mOffsetsRows = 	{-1, -1, -1, 0, 1, 1,  1,  0};
 	private final static int[] mOffsetsColumns = {-1,  0,  1, 1, 1, 0, -1, -1};
 
-	private AbstractPlayer mPlayer1;
-	private AbstractPlayer mPlayer2;
+	private AbstractPlayer mWhitePlayer;
+	private AbstractPlayer mBlackPlayer;
 
 	private boolean mIsBlackTurn = true; // par défaut : joueur 1 -> blanc, joueur 2 -> noir
 
@@ -26,15 +29,35 @@ public final class ReversiGame {
 	/**
 	 * Constructeur
 	 */
-	public ReversiGame(AbstractPlayer player1, AbstractPlayer player2) {
-		if(player1 == null || player2 == null)
+	public ReversiGame(AbstractPlayer whitePlayer, AbstractPlayer blackPlayer) {
+		if(whitePlayer == null || blackPlayer == null)
 			throw new IllegalArgumentException("player1 and player 2 must not be null values");
 
-		mPlayer1 = player1;
-		mPlayer2 = player2;
+		mWhitePlayer = whitePlayer;
+		mBlackPlayer = blackPlayer;
+
+		mWhitePlayer.setColor(Piece.Color.White);
+		mBlackPlayer.setColor(Piece.Color.Black);
+
 
 		mBoard = new Board(ROWS, COLUMNS);
 		initializeBoard();
+	}
+
+	/**
+	 * Copy constructor
+	 * @param other
+	 */
+	public ReversiGame(ReversiGame other) {
+		if(other == null)
+			throw new IllegalArgumentException("Cannot create copy object from null value");
+
+		mWhitePlayer = other.mWhitePlayer.copy();
+		mBlackPlayer = other.mBlackPlayer.copy();
+
+		mIsBlackTurn = other.mIsBlackTurn;
+
+		mBoard = new Board(other.mBoard);
 	}
 	
 	/**
@@ -53,15 +76,15 @@ public final class ReversiGame {
 		this.mBoard.addPiece(middleRow - 1, middleColumn    , Piece.Color.Black);
 		this.mBoard.addPiece(middleRow    , middleColumn - 1, Piece.Color.Black);
 
-		// score par défaut des deux joueurs
-		mPlayer1.setScore(2);
-		mPlayer2.setScore(2);
+		// score initial des deux joueurs
+		mWhitePlayer.setScore(2);
+		mBlackPlayer.setScore(2);
 	}
 
 	/**
 	 * Commence la boucle du jeu
 	 */
-	public void startGame() {
+	public void play() {
 		// pour chaque tour
 		boolean hasValidWhiteMoves = true;
 		boolean hasValidBlackMoves = true;
@@ -71,8 +94,10 @@ public final class ReversiGame {
 
 			Piece.Color currentColor = (mIsBlackTurn ? Piece.Color.Black : Piece.Color.White );
 
+			List<MovePosition> possibleMoves = getPossibleMoves(currentColor);
+
 			// si un joueur n'a pas de mouvement possible, on passe son tour
-			if(!hasValidMoves(currentColor)) {
+			if(possibleMoves.isEmpty()) {
 				if(mIsBlackTurn)
 					hasValidBlackMoves = false;
 				else
@@ -87,7 +112,7 @@ public final class ReversiGame {
 
 				// tant que la position donnée n'eest pas un coup possible
 				do {
-					attemptedMove = (mIsBlackTurn ? mPlayer2 : mPlayer1).playTurn(this);
+					attemptedMove = (mIsBlackTurn ? mBlackPlayer : mWhitePlayer).playTurn(this, possibleMoves);
 				} while(!isPossibleMove(attemptedMove.getRow(), attemptedMove.getColumn(), currentColor));
 
 				performMove(attemptedMove.getRow(), attemptedMove.getColumn(), currentColor);
@@ -104,20 +129,50 @@ public final class ReversiGame {
 	public Board getBoard() {
 		return mBoard;
 	}
-	
+
+	/**
+	 * Renvoie le joueur de la couleur demandée
+	 * @param color couleur du joueur
+	 * @return instance du joueur
+	 */
+	public AbstractPlayer getPlayerByColor(Piece.Color color) {
+		if(color == Piece.Color.Black)
+			return mBlackPlayer;
+		else
+			return mWhitePlayer;
+	}
+
+	/**
+	 * Renvoie l'instance du joueur blanc
+	 * @return joueur blanc
+	 */
+	public AbstractPlayer getWhitePlayer() {
+		return mWhitePlayer;
+	}
+
+	/**
+	 * Renvoie l'instance du joueur noir
+	 * @return joueur noir
+	 */
+	public AbstractPlayer getBlackPlayer() {
+		return mBlackPlayer;
+	}
+
 	/**
 	 * Vérifie que le plateau contient des mouvements possibles pour la couleur donnée
 	 * @param c couleur à vérifier
 	 * @return vrai si des mouvements sont possibles, faux sinon
 	 */
-	public boolean hasValidMoves(Piece.Color c) {
+	public List<MovePosition> getPossibleMoves(Piece.Color c) {
+		List<MovePosition> possibleMoves = new ArrayList<>();
+
 		for(int i = 0; i < mBoard.getRows(); i++) {
 			for(int j = 0; j < mBoard.getColumns(); j++) {
 				if(isPossibleMove(i, j, c))
-					return true;
+					possibleMoves.add(new MovePosition(i, j));
 			}
 		}
-		return false;
+		return possibleMoves;
 	}
 	
 	/**
@@ -191,7 +246,7 @@ public final class ReversiGame {
 	 * @param color couleur de la pièce à poser
 	 * @return vrai si le mouvement a été effectué, faux sinon
 	 */
-	private boolean performMove(int row, int column, Piece.Color color) {
+	public boolean performMove(int row, int column, Piece.Color color) {
 		boolean isValid = false;
 
 		// si il y a déjà une pièce sur cette case, le mouvement est impossible
@@ -229,9 +284,9 @@ public final class ReversiGame {
 
 					// on ajoute un point au joueur ayant posé sa pièce
 					if(color == Piece.Color.Black)
-						mPlayer2.incrementScore();
+						mBlackPlayer.incrementScore();
 					else
-						mPlayer1.incrementScore();
+						mWhitePlayer.incrementScore();
 					
 					while(startRow != currentRow || startColumn != currentColumn) {
 						// mark the move as valid
@@ -246,11 +301,11 @@ public final class ReversiGame {
 						// on ajoute autant de points que de pièce que doit retourner la pièce posée
 						// et on enlève les points à l'autre joueur
 						if(flippedPiece.getColor() == Piece.Color.White) {
-							mPlayer2.decrementScore();
-							mPlayer1.incrementScore();
+							mBlackPlayer.decrementScore();
+							mWhitePlayer.incrementScore();
 						} else {
-							mPlayer2.incrementScore();
-							mPlayer1.decrementScore();
+							mBlackPlayer.incrementScore();
+							mWhitePlayer.decrementScore();
 						}
 						
 						// on passe à la pièce suivante
@@ -274,10 +329,20 @@ public final class ReversiGame {
 	 * Pour récapituler les scores et afficher le gagnant
 	 */
 	private void endGame() {
-		int p1Score = mPlayer1.getScore();
-		int p2Score = mPlayer2.getScore();
+		int whiteScore = mWhitePlayer.getScore();
+		int blackScore = mBlackPlayer.getScore();
 
-		System.out.println("Blanc ->" + p1Score + " | Noir -> " + p2Score);
+		System.out.println(toString());
+
+		if(whiteScore > blackScore) {
+			System.out.println("Le joueur Blanc remporte la partie !");
+		}
+		else if(whiteScore < blackScore) {
+			System.out.println("Le joueur Noir remporte la partie !");
+		}
+		else {
+			System.out.println("les deux joueurs finnissent à égalité.");
+		}
 	}
 	
 	/**
@@ -287,7 +352,7 @@ public final class ReversiGame {
 	public String toString() {
 		String ret = "";
 		ret += "Tour du joueur " + (mIsBlackTurn ? "Noir" : "Blanc") + "\n";
-		ret += "Blanc ->" + mPlayer1.getScore() + " | Noir -> " + mPlayer2.getScore() + "\n";
+		ret += "Blanc ->" + mWhitePlayer.getScore() + " | Noir -> " + mBlackPlayer.getScore() + "\n";
 		ret += mBoard.toString();
 		return ret;
 	}

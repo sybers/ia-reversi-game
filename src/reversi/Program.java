@@ -1,19 +1,21 @@
 package reversi;
 
-import reversi.players.HumanPlayer;
+import reversi.players.AbstractPlayer;
+import reversi.players.AIPlayer;
+import reversi.players.ia.heuristics.MaximiseScoreHeuristic;
+import reversi.players.ia.heuristics.MobilityHeuristic;
 
 public class Program {
 
 	public static void main(String[] args) {
-		HumanPlayer player1 = new HumanPlayer();
-		HumanPlayer player2 = new HumanPlayer();
+		AbstractPlayer whitePlayer = new AIPlayer(new MaximiseScoreHeuristic());
+		AbstractPlayer blackPlayer = new AIPlayer(new MobilityHeuristic());
 
-		ReversiGame g = new ReversiGame(player1, player2);
+		ReversiGame g = new ReversiGame(whitePlayer, blackPlayer);
 		
-		g.startGame();
+		g.play();
 		
 		System.out.println("Fin de la partie");
-		
 	}
 
 }
