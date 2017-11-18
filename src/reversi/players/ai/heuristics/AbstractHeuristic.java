@@ -1,4 +1,4 @@
-package reversi.players.ia;
+package reversi.players.ai.heuristics;
 
 import reversi.Piece;
 import reversi.ReversiGame;

@@ -22,28 +22,23 @@ public class Board {
 
     /**
      * Constructeur par recopie
-     * @param other
+     * @return nouvelle instance
      */
-    public Board(Board other) {
-        if(other == null)
-            throw new IllegalArgumentException("Cannot create copy object from null value");
+    public Board copy() {
+		Board other = new Board(mPlaces.length, mPlaces[0].length);
 
-        // on créée le plateau de jeu avec la même taille
-        int rows = other.mPlaces.length;
-        int columns = other.mPlaces[0].length;
+		// crée un tableau avec les pièces courantes
+		for(int i = 0; i < mPlaces.length; i++) {
+			for(int j = 0; j < mPlaces[0].length; j++) {
+				if(mPlaces[i][j] == null) {
+					other.mPlaces[i][j] = null;
+				} else {
+					other.mPlaces[i][j] = new Piece(mPlaces[i][j].getColor());
+				}
+			}
+		}
 
-        mPlaces = new Piece[rows][columns];
-
-        // initialise le plateau avec les pièces de l'autre
-        for(int i = 0; i < mPlaces.length; i++) {
-            for(int j = 0; j < mPlaces[0].length; j++) {
-                if(other.mPlaces[i][j] == null) {
-                    mPlaces[i][j] = null;
-                } else {
-                    mPlaces[i][j] = new Piece(other.mPlaces[i][j].getColor());
-                }
-            }
-        }
+		return other;
 	}
 	
 	/**
@@ -94,10 +89,10 @@ public class Board {
 	 * @param column numéro de la colonne
 	 */
 	private boolean checkCoordinatesInput(int row, int column) {
-		if(row < 0 || column < 0 || row >= mPlaces.length || column >= mPlaces[0].length)
-			return false;
-		else
-			return true;
+		return row >= 0 &&
+				column >= 0 &&
+				row < mPlaces.length &&
+				column < mPlaces[0].length;
 	}
 	
 	/**
@@ -105,27 +100,27 @@ public class Board {
 	 */
 	@Override
 	public String toString() {
-		String ret = "   ";
+		StringBuilder ret = new StringBuilder("   ");
 		// affiche la ligne avec les coordonnées des colonnes
 		for(int i = 0; i < mPlaces.length; i++) {
-			ret += i + " ";
+			ret.append(i).append(" ");
 		}
 		
-		ret +="\n";
+		ret.append("\n");
 		
 		// affiche le plateau de jeu et les numéros de ligne
 		for(int i = 0; i < mPlaces.length; i++) {
-			ret += i + " ";
+			ret.append(i).append(" ");
 			for(int j = 0; j < mPlaces[0].length; j++) {
 				if(mPlaces[i][j] == null) {
-					ret += " -";
+					ret.append(" -");
 				} else {
-					ret += " " + mPlaces[i][j].toString();
+					ret.append(" ").append(mPlaces[i][j].toString());
 				}
 			}
-			ret += "\n";
+			ret.append("\n");
 		}
 		
-		return ret;
+		return ret.toString();
 	}
 }

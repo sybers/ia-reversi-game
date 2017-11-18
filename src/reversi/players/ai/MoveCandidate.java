@@ -1,4 +1,4 @@
-package reversi.players.ia;
+package reversi.players.ai;
 
 import reversi.MovePosition;
 

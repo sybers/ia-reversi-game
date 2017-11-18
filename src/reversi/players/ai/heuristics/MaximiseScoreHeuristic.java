@@ -1,8 +1,7 @@
-package reversi.players.ia.heuristics;
+package reversi.players.ai.heuristics;
 
 import reversi.Piece;
 import reversi.ReversiGame;
-import reversi.players.ia.AbstractHeuristic;
 
 public class MaximiseScoreHeuristic extends AbstractHeuristic {
 
@@ -16,6 +15,6 @@ public class MaximiseScoreHeuristic extends AbstractHeuristic {
     public double evaluate(ReversiGame game, Piece.Color playerColor) {
         int MaxScore = game.getPlayerByColor(playerColor).getScore();
         int MinScore = game.getPlayerByColor(playerColor == Piece.Color.White ? Piece.Color.Black : Piece.Color.White).getScore();
-        return 100* (MaxScore - MinScore) / (MaxScore + MinScore);
+        return 100 * (MaxScore - MinScore) / (MaxScore + MinScore);
     }
 }
