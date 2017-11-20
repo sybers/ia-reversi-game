@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd43033f-34cf-4ec9-91dc-2df8918c7837" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/reversi/players/ai/MiniMax.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/reversi/players/ia/AbstractHeuristic.java" afterPath="$PROJECT_DIR$/src/reversi/players/ai/heuristics/AbstractHeuristic.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/reversi/players/ia/MoveCandidate.java" afterPath="$PROJECT_DIR$/src/reversi/players/ai/MoveCandidate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/reversi/players/ia/heuristics/MaximiseScoreHeuristic.java" afterPath="$PROJECT_DIR$/src/reversi/players/ai/heuristics/MaximiseScoreHeuristic.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/reversi/players/ia/heuristics/MobilityHeuristic.java" afterPath="$PROJECT_DIR$/src/reversi/players/ai/heuristics/MobilityHeuristic.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reversi/Board.java" afterPath="$PROJECT_DIR$/src/reversi/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reversi/Program.java" afterPath="$PROJECT_DIR$/src/reversi/Program.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reversi/ReversiGame.java" afterPath="$PROJECT_DIR$/src/reversi/ReversiGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reversi/players/AIPlayer.java" afterPath="$PROJECT_DIR$/src/reversi/players/AIPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reversi/players/ai/MiniMax.java" afterPath="$PROJECT_DIR$/src/reversi/players/ai/MiniMax.java" />
     </list>
     <ignored path="ia-reversi-game.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,8 +29,8 @@
       <file leaf-file-name="Program.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reversi/Program.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="11" column="78" lean-forward="false" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
+            <state relative-caret-position="0">
+              <caret line="13" column="66" lean-forward="false" selection-start-line="13" selection-start-column="66" selection-end-line="13" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,27 +41,8 @@
       <file leaf-file-name="ReversiGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reversi/ReversiGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="103" column="71" lean-forward="true" selection-start-line="103" selection-start-column="71" selection-end-line="103" selection-end-column="71" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-                <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-                <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-                <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-                <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-                <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-                <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AIPlayer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reversi/players/AIPlayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="393">
+              <caret line="355" column="13" lean-forward="true" selection-start-line="355" selection-start-column="13" selection-end-line="355" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,12 +53,10 @@
       <file leaf-file-name="MiniMax.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/reversi/players/ai/MiniMax.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-104">
-              <caret line="82" column="35" lean-forward="false" selection-start-line="82" selection-start-column="35" selection-end-line="82" selection-end-column="35" />
+            <state relative-caret-position="152">
+              <caret line="95" column="83" lean-forward="false" selection-start-line="95" selection-start-column="83" selection-end-line="95" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#312#313#0" expanded="true" />
-                <element signature="e#350#351#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,7 +74,6 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>incre</find>
-      <find>incrementScore</find>
       <find>mPla</find>
       <find>player</find>
       <find>perf</find>
@@ -112,6 +81,13 @@
       <find>play</find>
       <find>throw</find>
       <find>List</find>
+      <find>mIsGameOver</find>
+      <find>isGameOver</find>
+      <find>sGameOver</find>
+      <find>score</find>
+      <find>incrementScore</find>
+      <find>decrementScore</find>
+      <find>increment</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -141,9 +117,9 @@
         <option value="$PROJECT_DIR$/src/reversi/players/ai/heuristics/MobilityHeuristic.java" />
         <option value="$PROJECT_DIR$/src/reversi/players/ai/heuristics/AbstractHeuristic.java" />
         <option value="$PROJECT_DIR$/src/reversi/Board.java" />
-        <option value="$PROJECT_DIR$/src/reversi/ReversiGame.java" />
-        <option value="$PROJECT_DIR$/src/reversi/Program.java" />
         <option value="$PROJECT_DIR$/src/reversi/players/AIPlayer.java" />
+        <option value="$PROJECT_DIR$/src/reversi/Program.java" />
+        <option value="$PROJECT_DIR$/src/reversi/ReversiGame.java" />
         <option value="$PROJECT_DIR$/src/reversi/players/ai/MiniMax.java" />
       </list>
     </option>
@@ -179,8 +155,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -222,7 +199,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -726,12 +702,13 @@
       <workItem from="1510229974408" duration="267000" />
       <workItem from="1510821039043" duration="53000" />
       <workItem from="1510821135206" duration="47000" />
-      <workItem from="1511026015139" duration="384000" />
+      <workItem from="1511026015139" duration="2496000" />
+      <workItem from="1511163950510" duration="1615000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63772000" />
+    <option name="totallyTimeSpent" value="67499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -745,19 +722,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28899637" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.286578" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28899637" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.286578" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14020029" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1416309" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32406288" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32406288" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -830,13 +807,6 @@
           <caret line="229" column="50" lean-forward="true" selection-start-line="229" selection-start-column="50" selection-end-line="229" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -867,13 +837,6 @@
           <caret line="216" column="106" lean-forward="true" selection-start-line="216" selection-start-column="106" selection-end-line="216" selection-end-column="106" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -928,13 +891,6 @@
           <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -975,13 +931,6 @@
           <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1002,13 +951,6 @@
           <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1057,13 +999,6 @@
           <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1084,13 +1019,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1147,14 +1075,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reversi/players/ai/MoveCandidate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="53" column="5" lean-forward="false" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1205,20 +1125,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reversi/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="105" column="38" lean-forward="true" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reversi/players/AbstractPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="86" column="94" lean-forward="true" selection-start-line="86" selection-start-column="94" selection-end-line="86" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reversi/players/ai/heuristics/AbstractHeuristic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1235,8 +1141,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reversi/players/AIPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="456">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1245,39 +1151,60 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reversi/Program.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="11" column="78" lean-forward="false" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
+        <state relative-caret-position="0">
+          <caret line="13" column="66" lean-forward="false" selection-start-line="13" selection-start-column="66" selection-end-line="13" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reversi/players/ai/MoveCandidate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="53" column="5" lean-forward="false" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reversi/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="55" column="15" lean-forward="false" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+          <folding>
+            <element signature="e#1161#1162#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reversi/players/AbstractPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="40" column="16" lean-forward="false" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
+          <folding>
+            <element signature="e#851#852#0" expanded="true" />
+            <element signature="e#881#882#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reversi/ReversiGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="103" column="71" lean-forward="true" selection-start-line="103" selection-start-column="71" selection-end-line="103" selection-end-column="71" />
+        <state relative-caret-position="393">
+          <caret line="355" column="13" lean-forward="true" selection-start-line="355" selection-start-column="13" selection-end-line="355" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#ReversiGame#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#copy#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#initializeBoard#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#getPossibleMoves#0;class#ReversiGame#0" expanded="false" />
-            <element signature="method#toString#0;class#ReversiGame#0" expanded="false" />
-            <element signature="docComment;method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
-            <element signature="method#isPossibleMove#1;class#ReversiGame#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reversi/players/ai/MiniMax.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-104">
-          <caret line="82" column="35" lean-forward="false" selection-start-line="82" selection-start-column="35" selection-end-line="82" selection-end-column="35" />
+        <state relative-caret-position="152">
+          <caret line="95" column="83" lean-forward="false" selection-start-line="95" selection-start-column="83" selection-end-line="95" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
           </folding>
         </state>
       </provider>
