@@ -15,11 +15,20 @@ public class HumanPlayer extends AbstractPlayer {
     private Scanner mScanner = new Scanner(System.in);
 
     /**
+     * Créer un joueur avec un score initialisé à 0
+     *
+     * @param c
+     */
+    public HumanPlayer(Piece.Color c) {
+        super(c);
+    }
+
+    /**
      * Cette méthode est appelée lorsque le joueur doit jouer son tour
      * Le joueur humain sélectionne arbitrairement la position qu'il souhite jouer
      */
     @Override
-    public MovePosition playTurn(ReversiGame game, List<MovePosition> possibleMoves) {
+    public MovePosition playTurn(ReversiGame game) {
         // on affiche le plateau de jeu dans la console
         System.out.println(game.toString());
 
@@ -36,9 +45,8 @@ public class HumanPlayer extends AbstractPlayer {
      */
     @Override
     public AbstractPlayer copy() {
-        HumanPlayer copy = new HumanPlayer();
+        HumanPlayer copy = new HumanPlayer(mColor);
         copy.setScore(mScore);
-        copy.setColor(mColor);
         return copy;
     }
 

@@ -1,6 +1,5 @@
 package reversi.players.ai.heuristics;
 
-import reversi.Piece;
 import reversi.ReversiGame;
 
 public abstract class AbstractHeuristic {
@@ -9,5 +8,11 @@ public abstract class AbstractHeuristic {
      * Evaluate the game board using the current heuristic
      * @return score
      */
-    public abstract double evaluate(ReversiGame game, Piece.Color playerColor);
+    public abstract double evaluate(ReversiGame game);
+
+    /**
+     * Copie de l'instance
+     * @return nouvelle instante
+     */
+    public abstract AbstractHeuristic copy();
 }

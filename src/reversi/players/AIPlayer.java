@@ -1,20 +1,19 @@
 package reversi.players;
 
 import reversi.MovePosition;
+import reversi.Piece;
 import reversi.ReversiGame;
 
 import reversi.players.ai.MiniMax;
 import reversi.players.ai.heuristics.AbstractHeuristic;
-
-import java.util.List;
 
 public class AIPlayer extends AbstractPlayer {
 
     private AbstractHeuristic mHeuristic;
     private int mDepth = 3;
 
-    public AIPlayer(AbstractHeuristic heuristic, int depth) {
-        super();
+    public AIPlayer(Piece.Color c, AbstractHeuristic heuristic, int depth) {
+        super(c);
 
         if(heuristic == null)
             throw new IllegalArgumentException("Heuristic cannot be null value");
@@ -27,13 +26,19 @@ public class AIPlayer extends AbstractPlayer {
     }
 
     @Override
-    public MovePosition playTurn(ReversiGame game, List<MovePosition> possibleMoves) {
+    public MovePosition playTurn(ReversiGame game) {
 
         System.out.println(game.toString());
 
         MiniMax minimax = new MiniMax(mHeuristic);
 
-        return minimax.explore(game, mDepth);
+        // long startTime = System.currentTimeMillis();
+        MovePosition bestMove = minimax.explore(game, mDepth);
+        // long endTime = System.currentTimeMillis();
+        // System.out.println("Total execution time: " + (endTime-startTime) + "ms");
+
+
+        return bestMove;
     }
 
     /**
@@ -42,9 +47,8 @@ public class AIPlayer extends AbstractPlayer {
      */
     @Override
     public AbstractPlayer copy() {
-        AIPlayer copy = new AIPlayer(mHeuristic, mDepth);
+        AIPlayer copy = new AIPlayer(mColor, mHeuristic.copy(), mDepth);
         copy.setScore(mScore);
-        copy.setColor(mColor);
         return copy;
     }
 }

@@ -27,21 +27,24 @@ public class MiniMax {
         System.out.println("----------");
         System.out.println("Début de l'exploration min/max");
 
-        ReversiGame virtualGame = game.copy();
-
         double maxScore = Double.NEGATIVE_INFINITY;
         MovePosition bestMove = null;
 
-        List<MovePosition> movesAvailable = virtualGame.getPossibleMoves(virtualGame.getCurrentPlayerColor());
+        List<MovePosition> moves = game.getPossibleMoves(game.getCurrentPlayer());
+        ReversiGame virtualGame;
 
-        System.out.println("Il y a " + movesAvailable.size() + " coups disponibles.");
+        System.out.println("Il y a " + moves.size() + " coups disponibles à partir de l'état de base.");
 
-        for(MovePosition pos : movesAvailable) {
+        for(MovePosition pos : moves) {
+
+            virtualGame = game.copy();
 
             // simule le coup
-            virtualGame.performMove(pos, virtualGame.getCurrentPlayerColor());
+            virtualGame.play(pos);
 
-            double score = min(virtualGame, depth);
+            double score = min(virtualGame, depth - 1);
+
+            System.out.println("Score du coup : " + pos.toString() + " -> " + score);
 
             if(score > maxScore || score == maxScore && Math.random() > 0.5) {
                 maxScore = score;
@@ -58,29 +61,37 @@ public class MiniMax {
     }
 
     /**
-     * Calcule du max
+     * Calcul du min
      * @return mouvement choisi
      */
     private double min(ReversiGame game, int depth) {
-        if(depth == 0 || game.isGameOver()) {
-            double score = mHeuristic.evaluate(game, game.getCurrentPlayerColor());
-            System.out.println("Calculated score is : " + score);
-            return score;
+        if(depth == 0 || game.isGameOver()){
+            return mHeuristic.evaluate(game);
         }
 
         double minScore = Double.POSITIVE_INFINITY;
-        ReversiGame virtualGame = game.copy();
 
-        List<MovePosition> moves = virtualGame.getPossibleMoves(virtualGame.getCurrentPlayerColor());
+        List<MovePosition> moves = game.getPossibleMoves(game.getCurrentPlayer());
+        ReversiGame virtualGame;
+
+        // pas de coups pour le joueur min mais la partie n'ets pas terminée, on passe au joueur max
+        if (moves.isEmpty()) {
+            virtualGame = game.copy();
+            virtualGame.play();
+            return max(virtualGame, depth - 1);
+        }
+
 
         for(MovePosition pos : moves) {
 
+            virtualGame = game.copy();
+
             // simule le coup
-            virtualGame.performMove(pos, virtualGame.getCurrentPlayerColor());
+            virtualGame.play(pos);
 
             double score = max(virtualGame, depth - 1);
 
-            if(score < minScore || score == minScore && Math.random() > 0.5)
+            if(score < minScore)
                 minScore = score;
         }
 
@@ -88,29 +99,36 @@ public class MiniMax {
     }
 
     /**
-     * Calcule du min
+     * Calcul du max
      * @return mouvement choisi
      */
     private double max(ReversiGame game, int depth) {
         if(depth == 0 || game.isGameOver()) {
-            double score = mHeuristic.evaluate(game, game.getCurrentPlayerColor());
-            System.out.println("Calculated score is : " + score);
-            return score;
+            return mHeuristic.evaluate(game);
         }
 
         double maxScore = Double.NEGATIVE_INFINITY;
-        ReversiGame virtualGame = game.copy();
 
-        List<MovePosition> moves = virtualGame.getPossibleMoves(virtualGame.getCurrentPlayerColor());
+        List<MovePosition> moves = game.getPossibleMoves(game.getCurrentPlayer());
+        ReversiGame virtualGame;
+
+        // pas de coups pour le joueur min mais la partie n'ets pas terminée, on passe au joueur max
+        if (moves.isEmpty()) {
+            virtualGame = game.copy();
+            virtualGame.play();
+            return min(virtualGame, depth - 1);
+        }
 
         for(MovePosition pos : moves) {
 
+            virtualGame = game.copy();
+
             // simule le coup
-            virtualGame.performMove(pos, virtualGame.getCurrentPlayerColor());
+            virtualGame.play(pos);
 
             double score = min(virtualGame, depth - 1);
 
-            if(score > maxScore || score == maxScore && Math.random() > 0.5)
+            if(score > maxScore)
                 maxScore = score;
         }
 
