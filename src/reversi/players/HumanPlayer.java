@@ -12,12 +12,12 @@ import java.util.Scanner;
  * Cette classe permet de définir les actions d'un joueur humain
  */
 public class HumanPlayer extends AbstractPlayer {
-    private Scanner mScanner = new Scanner(System.in);
+    private final Scanner mScanner = new Scanner(System.in);
 
     /**
      * Créer un joueur avec un score initialisé à 0
      *
-     * @param c
+     * @param c Couleur du joueur
      */
     public HumanPlayer(Piece.Color c) {
         super(c);

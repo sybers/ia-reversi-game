@@ -61,12 +61,13 @@ public class Board {
 	 * Ajouter une pièce au plateau à la position [row, column]
 	 */
 	public boolean addPiece(int row, int column, Piece.Color c) {
-		if(!checkCoordinatesInput(row, column)) {
-			return false;
-		} else {
+
+		if(checkCoordinatesInput(row, column)) {
 			mPlaces[row][column] = new Piece(c);
 			return true;
 		}
+
+		return false;
 	}
 	
 	/**
@@ -76,11 +77,11 @@ public class Board {
 	 * @return Pièce à la position spécifiée
 	 */
 	public Piece getPiece(int row, int column) {
-		if(!checkCoordinatesInput(row, column)){
-			return null;
-		} else {
+		if(checkCoordinatesInput(row, column)){
 			return mPlaces[row][column];
 		}
+
+		return null;
 	}
 	
 	/**

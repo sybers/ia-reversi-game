@@ -3,26 +3,40 @@ package reversi;
 import reversi.players.AbstractPlayer;
 import reversi.players.HumanPlayer;
 import reversi.players.AIPlayer;
+import reversi.players.ai.heuristics.CompositeHeurstic;
+import reversi.players.ai.heuristics.CornersCapturedHeuristic;
+import reversi.players.ai.heuristics.MaximiseScoreHeuristic;
 import reversi.players.ai.heuristics.MobilityHeuristic;
 
 public class Program {
 
 	public static void main(String[] args) {
-		//AbstractPlayer whitePlayer = new HumanPlayer(Piece.Color.White);
-		//AbstractPlayer blackPlayer = new HumanPlayer(Piece.Color.Black);
+	    String outputFileName = "Users/stanyslasbres/Desktop/stats.csv";
 
-        AbstractPlayer whitePlayer = new AIPlayer(Piece.Color.White, new MobilityHeuristic(), 1);
-        AbstractPlayer blackPlayer = new AIPlayer(Piece.Color.Black, new MobilityHeuristic(), 4);
+	    int gamesToPlay = 100;
 
-		ReversiGame g = new ReversiGame(whitePlayer, blackPlayer);
+	    for(int i = 0; i < gamesToPlay; i++) {
+            //AbstractPlayer whitePlayer = new HumanPlayer(Piece.Color.White);
+            //AbstractPlayer blackPlayer = new HumanPlayer(Piece.Color.Black);
 
-		g.init();
+            CompositeHeurstic compositeHeurstic = new CompositeHeurstic();
+            compositeHeurstic.addHeuristic(new MaximiseScoreHeuristic(), 10);
+            compositeHeurstic.addHeuristic(new MobilityHeuristic(), 78.922);
+            compositeHeurstic.addHeuristic(new CornersCapturedHeuristic(), 801.724);
 
-		// play until the game is over
-		while(!g.isGameOver()) {
-			g.play();
-		}
+            AbstractPlayer whitePlayer = new AIPlayer(Piece.Color.White, new MobilityHeuristic(), 2);
+            AbstractPlayer blackPlayer = new AIPlayer(Piece.Color.Black, compositeHeurstic, 2);
 
-		g.resumeScores();
+            ReversiGame g = new ReversiGame(whitePlayer, blackPlayer);
+
+            g.init();
+
+            // play until the game is over
+            while(!g.isGameOver()) {
+                g.play();
+            }
+
+            System.out.println(g.gameStateToCSV());
+        }
 	}
 }

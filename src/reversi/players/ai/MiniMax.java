@@ -9,11 +9,20 @@ import java.util.List;
 /**
  * Algorithme Mini-Max
  */
-public class MiniMax {
+public final class MiniMax {
+    private boolean mUseAlphaBeta = false;
+
     private AbstractHeuristic mHeuristic;
 
     public MiniMax(AbstractHeuristic heuristic) {
         mHeuristic = heuristic;
+    }
+
+    /**
+     * Active l'élagage alpha-beta pour l'exploration des solutions
+     */
+    public void enableAlphaBete() {
+        mUseAlphaBeta = true;
     }
 
     /**
@@ -24,8 +33,8 @@ public class MiniMax {
         if(game == null)
             throw new IllegalArgumentException("game cannot be null");
 
-        System.out.println("----------");
-        System.out.println("Début de l'exploration min/max");
+        //System.out.println("----------");
+        //System.out.println("Début de l'exploration min/max");
 
         double maxScore = Double.NEGATIVE_INFINITY;
         MovePosition bestMove = null;
@@ -33,7 +42,7 @@ public class MiniMax {
         List<MovePosition> moves = game.getPossibleMoves(game.getCurrentPlayer());
         ReversiGame virtualGame;
 
-        System.out.println("Il y a " + moves.size() + " coups disponibles à partir de l'état de base.");
+        //System.out.println("Il y a " + moves.size() + " coups disponibles à partir de l'état de base.");
 
         for(MovePosition pos : moves) {
 
@@ -44,7 +53,7 @@ public class MiniMax {
 
             double score = min(virtualGame, depth - 1);
 
-            System.out.println("Score du coup : " + pos.toString() + " -> " + score);
+            // System.out.println("Score du coup : " + pos.toString() + " -> " + score);
 
             if(score > maxScore || score == maxScore && Math.random() > 0.5) {
                 maxScore = score;
@@ -53,8 +62,8 @@ public class MiniMax {
 
         }
 
-        System.out.println("Fin de l'explortation min/max, meilleur coup -> " + bestMove + ", score -> " + maxScore);
-        System.out.println("----------\n");
+        //System.out.println("Fin de l'explortation min/max, meilleur coup -> " + bestMove + ", score -> " + maxScore);
+        //System.out.println("----------\n");
 
         return bestMove;
 
@@ -74,7 +83,7 @@ public class MiniMax {
         List<MovePosition> moves = game.getPossibleMoves(game.getCurrentPlayer());
         ReversiGame virtualGame;
 
-        // pas de coups pour le joueur min mais la partie n'ets pas terminée, on passe au joueur max
+        // pas de coups, on passe au joueur suivant
         if (moves.isEmpty()) {
             virtualGame = game.copy();
             virtualGame.play();
@@ -112,7 +121,7 @@ public class MiniMax {
         List<MovePosition> moves = game.getPossibleMoves(game.getCurrentPlayer());
         ReversiGame virtualGame;
 
-        // pas de coups pour le joueur min mais la partie n'ets pas terminée, on passe au joueur max
+        // pas de coups, on passe au joueur suivant
         if (moves.isEmpty()) {
             virtualGame = game.copy();
             virtualGame.play();

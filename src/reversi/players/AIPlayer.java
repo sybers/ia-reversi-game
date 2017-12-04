@@ -28,17 +28,15 @@ public class AIPlayer extends AbstractPlayer {
     @Override
     public MovePosition playTurn(ReversiGame game) {
 
-        System.out.println(game.toString());
+        //System.out.println(game.toString());
 
         MiniMax minimax = new MiniMax(mHeuristic);
 
         // long startTime = System.currentTimeMillis();
-        MovePosition bestMove = minimax.explore(game, mDepth);
         // long endTime = System.currentTimeMillis();
         // System.out.println("Total execution time: " + (endTime-startTime) + "ms");
 
-
-        return bestMove;
+        return minimax.explore(game, mDepth);
     }
 
     /**
