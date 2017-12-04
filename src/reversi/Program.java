@@ -1,8 +1,8 @@
 package reversi;
 
-import reversi.players.AbstractPlayer;
 import reversi.players.HumanPlayer;
 import reversi.players.AIPlayer;
+import reversi.players.PlayerInterface;
 import reversi.players.ai.heuristics.CompositeHeurstic;
 import reversi.players.ai.heuristics.CornersCapturedHeuristic;
 import reversi.players.ai.heuristics.MaximiseScoreHeuristic;
@@ -24,8 +24,8 @@ public class Program {
             compositeHeurstic.addHeuristic(new MobilityHeuristic(), 78.922);
             compositeHeurstic.addHeuristic(new CornersCapturedHeuristic(), 801.724);
 
-            AbstractPlayer whitePlayer = new AIPlayer(Piece.Color.White, new MobilityHeuristic(), 2);
-            AbstractPlayer blackPlayer = new AIPlayer(Piece.Color.Black, compositeHeurstic, 2);
+            PlayerInterface whitePlayer = new AIPlayer(Piece.Color.White, new MobilityHeuristic(), 2);
+            PlayerInterface blackPlayer = new AIPlayer(Piece.Color.Black, compositeHeurstic, 2);
 
             ReversiGame g = new ReversiGame(whitePlayer, blackPlayer);
 

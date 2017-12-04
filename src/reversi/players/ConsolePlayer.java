@@ -3,24 +3,25 @@ package reversi.players;
 import reversi.MovePosition;
 import reversi.Piece;
 import reversi.ReversiGame;
-
-import java.util.List;
 import java.util.Scanner;
 
 /**
  * HumanPlayer
  * Cette classe permet de définir les actions d'un joueur humain
  */
-public class HumanPlayer extends AbstractPlayer {
+public class ConsolePlayer implements PlayerInterface {
     private final Scanner mScanner = new Scanner(System.in);
+
+    private int mScore;
+    private Piece.Color mColor;
 
     /**
      * Créer un joueur avec un score initialisé à 0
      *
      * @param c Couleur du joueur
      */
-    public HumanPlayer(Piece.Color c) {
-        super(c);
+    public ConsolePlayer(Piece.Color c) {
+        mColor = c;
     }
 
     /**
@@ -39,13 +40,28 @@ public class HumanPlayer extends AbstractPlayer {
         return new MovePosition(row, column);
     }
 
+    @Override
+    public void setScore(int score) {
+        mScore = score;
+    }
+
+    @Override
+    public int getScore() {
+        return mScore;
+    }
+
+    @Override
+    public Piece.Color getColor() {
+        return mColor;
+    }
+
     /**
      * Recopie de l'objet
      * @return copie de l'objet
      */
     @Override
-    public AbstractPlayer copy() {
-        HumanPlayer copy = new HumanPlayer(mColor);
+    public PlayerInterface copy() {
+        ConsolePlayer copy = new ConsolePlayer(mColor);
         copy.setScore(mScore);
         return copy;
     }

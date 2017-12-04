@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="reversi.gui.GameWindow">
+  <grid id="27dc6" binding="mPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-13421773"/>
+    </properties>
+    <border type="empty">
+      <size top="5" left="5" bottom="5" right="5"/>
+    </border>
+    <children>
+      <component id="de5cc" class="reversi.gui.BoardPanel" binding="mBoardPanel" custom-create="true">
+        <constraints border-constraint="Center"/>
+        <properties/>
+      </component>
+      <component id="7e7f1" class="reversi.gui.StatusBar" binding="mStatusBar" custom-create="true">
+        <constraints border-constraint="South"/>
+        <properties>
+          <background color="-1115905"/>
+          <foreground color="-1"/>
+        </properties>
+      </component>
+      <grid id="ff115" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="4" bottom="0" right="4"/>
+        <constraints border-constraint="East"/>
+        <properties>
+          <background color="-5221824"/>
+        </properties>
+        <border type="line">
+          <color color="-16777216"/>
+        </border>
+        <children>
+          <grid id="bac57" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-5221824"/>
+              <foreground color="-723724"/>
+            </properties>
+            <border type="etched" title="P1 (White)" title-justification="1"/>
+            <children>
+              <component id="b8cff" class="javax.swing.JComboBox" binding="mPlayer1Type">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <model>
+                    <item value="Human"/>
+                    <item value="Computer"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="50d5b" class="javax.swing.JComboBox" binding="mPlayer1Difficulty">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="false"/>
+                  <model>
+                    <item value="Easy"/>
+                    <item value="Medium"/>
+                    <item value="Hard"/>
+                  </model>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="8394c" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-5221824"/>
+              <foreground color="-723724"/>
+            </properties>
+            <border type="etched" title="P2 (Black)" title-justification="1"/>
+            <children>
+              <component id="faa3d" class="javax.swing.JComboBox" binding="mPlayer2Type">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <model>
+                    <item value="Human"/>
+                    <item value="Computer"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="9a552" class="javax.swing.JComboBox" binding="mPlayer2Difficulty">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="false"/>
+                  <model>
+                    <item value="Easy"/>
+                    <item value="Medium"/>
+                    <item value="Hard"/>
+                  </model>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="adf71" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-5221824"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="c6c95" class="javax.swing.JButton" binding="mNewGameButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="New Game"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <vspacer id="fff1c">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <grid id="2be7e" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-5221824"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="fe4f9" class="javax.swing.JLabel" binding="mP1ScoreLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="16"/>
+                  <foreground color="-723724"/>
+                  <horizontalAlignment value="0"/>
+                  <text value="-"/>
+                </properties>
+              </component>
+              <component id="43762" class="javax.swing.JLabel" binding="mP2ScoreLabel">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="16"/>
+                  <foreground color="-723724"/>
+                  <horizontalAlignment value="0"/>
+                  <text value="-"/>
+                </properties>
+              </component>
+              <hspacer id="7da2d">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="b552c" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-723724"/>
+                  <text value="P1 Score"/>
+                </properties>
+              </component>
+              <component id="7cb79" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-723724"/>
+                  <text value="P2 Score"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

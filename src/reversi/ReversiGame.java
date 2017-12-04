@@ -1,7 +1,6 @@
 package reversi;
 
-import reversi.players.AbstractPlayer;
-
+import reversi.players.PlayerInterface;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +13,8 @@ public final class ReversiGame {
     private final static int[] mOffsetsRows = 	{-1, -1, -1, 0, 1, 1,  1,  0};
     private final static int[] mOffsetsColumns = {-1,  0,  1, 1, 1, 0, -1, -1};
 
-	private AbstractPlayer mWhitePlayer;
-	private AbstractPlayer mBlackPlayer;
+	private PlayerInterface mWhitePlayer;
+	private PlayerInterface mBlackPlayer;
 
 	private List<MovePosition> mNextPossibleMoves;
 
@@ -31,7 +30,7 @@ public final class ReversiGame {
 	 * @param player1 instance du joueur 1
 	 * @param player2 instance du joueur 2
 	 */
-	public ReversiGame(AbstractPlayer player1, AbstractPlayer player2) {
+	public ReversiGame(PlayerInterface player1, PlayerInterface player2) {
 		this(player1, player2, 8, 8);
 	}
 
@@ -42,7 +41,7 @@ public final class ReversiGame {
 	 * @param rows nombre de lignes
 	 * @param columns nombre de colonnes
 	 */
-	public ReversiGame(AbstractPlayer player1, AbstractPlayer player2, int rows, int columns) {
+	public ReversiGame(PlayerInterface player1, PlayerInterface player2, int rows, int columns) {
 		if(player1 == null || player2 == null)
 			throw new IllegalArgumentException("player1 and player 2 must not be null values");
 
@@ -115,7 +114,7 @@ public final class ReversiGame {
 	 * Renvoie la couleur des pièces du joueur dont c'est le tour
 	 * @return
 	 */
-	public AbstractPlayer getCurrentPlayer() {
+	public PlayerInterface getCurrentPlayer() {
 		return mIsBlackTurn ? mBlackPlayer : mWhitePlayer;
 	}
 
@@ -123,7 +122,7 @@ public final class ReversiGame {
 	 * Renvoie l'instance du joueur adverse au tour en cours
 	 * @return Joueur adverse
 	 */
-	public AbstractPlayer getOpponentPlayer() {
+	public PlayerInterface getOpponentPlayer() {
 		return mIsBlackTurn ? mWhitePlayer : mBlackPlayer;
 	}
 
@@ -131,7 +130,7 @@ public final class ReversiGame {
 	 * Renvoie les coups possibles pour le donné
 	 * @return liste des mouvements possibles
 	 */
-	public List<MovePosition> getPossibleMoves(AbstractPlayer player) {
+	public List<MovePosition> getPossibleMoves(PlayerInterface player) {
 		List<MovePosition> possibleMoves = new ArrayList<>();
 		Piece.Color c = player.getColor();
 
@@ -162,23 +161,25 @@ public final class ReversiGame {
 
 		if(nextAvailableMoves.isEmpty() && mNextPossibleMoves.isEmpty()) {
 			mIsGameOver = true;
-		}
-		else {
+		} else {
 			mNextPossibleMoves = nextAvailableMoves;
 
 			if(!mNextPossibleMoves.isEmpty()) {
                 MovePosition attemptedMove;
 
                 if(desiredMove != null) {
-                    attemptedMove = desiredMove;
+                    if(isPossibleMove(desiredMove, getCurrentPlayer().getColor()))
+                        performMove(desiredMove);
+                    else
+                        return;
                 } else {
                     // tant que la position donnée n'eest pas un coup possible
                     do {
                         attemptedMove = getCurrentPlayer().playTurn(this);
                     } while(!isPossibleMove(attemptedMove, getCurrentPlayer().getColor()));
-                }
 
-                performMove(attemptedMove);
+                    performMove(attemptedMove);
+                }
                 updatePoints();
             } else {
                 // System.out.println("Pas de coups pour le joueur " + getCurrentPlayer().getColor());
@@ -333,6 +334,14 @@ public final class ReversiGame {
 
 		return isValid;
 	}
+
+    /**
+     * Renvoie une copie du plateau de jeu courant
+     * @return Copie du plateau de jeu
+     */
+	public Board getBoard() {
+	    return mBoard;
+    }
 
 	/**
 	 * Mets à jour les points des joueurs (appelée après un mouvement)

@@ -4,50 +4,35 @@ import reversi.MovePosition;
 import reversi.Piece;
 import reversi.ReversiGame;
 
-public abstract class AbstractPlayer {
-    protected int mScore = 0;
-    protected Piece.Color mColor;
-
-    /**
-     * Créer un joueur avec un score initialisé à 0
-     */
-    public AbstractPlayer(Piece.Color c) {
-        mColor = c;
-    }
+public interface PlayerInterface {
 
     /**
      * Change la valeur du score pour le joueur
      * @param score nouvelle valeur de score
      */
-    public void setScore(int score) {
-        mScore = score;
-    }
+    void setScore(int score);
 
     /**
      * Renvoie le score courant du joueur
      * @return valeur du score
      */
-    public int getScore() {
-        return mScore;
-    }
+    int getScore();
 
     /**
      * Renvoie la couleur du joueur
      * @return color couleur courante
      */
-    public Piece.Color getColor() {
-        return mColor;
-    }
+    Piece.Color getColor();
 
     /**
      * Méthode appelée lorsque le joueur doit jouer son tour
      * @param game Instance du jeu sur lequel le joueur va jouer
      */
-    public abstract MovePosition playTurn(ReversiGame game);
+    MovePosition playTurn(ReversiGame game);
 
     /**
      * Renvoie une nouvelle instance, copie du joueur
      * @return nouvelle instance
      */
-    public abstract AbstractPlayer copy();
+    PlayerInterface copy();
 }
