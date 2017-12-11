@@ -9,6 +9,13 @@ import java.util.List;
  * Classe gérant la logique du jeu
  */
 public final class ReversiGame {
+
+    // etats de jeu
+    public final static String GAME_FINISHED = "reversi.ReversiGame.GAME_FINISHED";
+    public final static String PLAYER_PLAYED = "reversi.ReversiGame.PLAYER_PLAYED";
+    public final static String SKIPPED_TURN = "reversi.ReversiGame.SKIPPED_TURN";
+    public final static String INVALID_MOVE = "reversi.ReversiGame.INVALID_MOVE";
+
     // offsets pour les directions
     private final static int[] mOffsetsRows = 	{-1, -1, -1, 0, 1, 1,  1,  0};
     private final static int[] mOffsetsColumns = {-1,  0,  1, 1, 1, 0, -1, -1};
@@ -154,40 +161,34 @@ public final class ReversiGame {
     /**
      * Joue le coup suivant pour le joueur dont c'est le tour avec le coup donné en paramètre
      */
-	public void play(MovePosition desiredMove) {
+	public String play(MovePosition desiredMove) {
 
 		// calcule les prochains coups possibles
 		List<MovePosition> nextAvailableMoves = getPossibleMoves(getCurrentPlayer());
 
+		// vérifie si la partie est terminée
 		if(nextAvailableMoves.isEmpty() && mNextPossibleMoves.isEmpty()) {
 			mIsGameOver = true;
-		} else {
-			mNextPossibleMoves = nextAvailableMoves;
-
-			if(!mNextPossibleMoves.isEmpty()) {
-                MovePosition attemptedMove;
-
-                if(desiredMove != null) {
-                    if(isPossibleMove(desiredMove, getCurrentPlayer().getColor()))
-                        performMove(desiredMove);
-                    else
-                        return;
-                } else {
-                    // tant que la position donnée n'eest pas un coup possible
-                    do {
-                        attemptedMove = getCurrentPlayer().playTurn(this);
-                    } while(!isPossibleMove(attemptedMove, getCurrentPlayer().getColor()));
-
-                    performMove(attemptedMove);
-                }
-                updatePoints();
-            } else {
-                // System.out.println("Pas de coups pour le joueur " + getCurrentPlayer().getColor());
-				// TODO : informer que le joueur n'a pas de coups possibles
-            }
-
-			switchPlayers();
+			return GAME_FINISHED;
 		}
+
+        mNextPossibleMoves = nextAvailableMoves;
+
+		// si le joueur suivant n'a pas de coups possibles
+        if(mNextPossibleMoves.isEmpty()) {
+            switchPlayers();
+            return SKIPPED_TURN;
+        }
+
+        if(!isPossibleMove(desiredMove, getCurrentPlayer().getColor())) {
+            return INVALID_MOVE;
+        }
+
+        performMove(desiredMove);
+        updatePoints();
+        switchPlayers();
+
+        return PLAYER_PLAYED;
 	}
 
 	/**

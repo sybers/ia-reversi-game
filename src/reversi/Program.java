@@ -1,6 +1,5 @@
 package reversi;
 
-import reversi.players.HumanPlayer;
 import reversi.players.AIPlayer;
 import reversi.players.PlayerInterface;
 import reversi.players.ai.heuristics.CompositeHeurstic;
@@ -11,8 +10,6 @@ import reversi.players.ai.heuristics.MobilityHeuristic;
 public class Program {
 
 	public static void main(String[] args) {
-	    String outputFileName = "Users/stanyslasbres/Desktop/stats.csv";
-
 	    int gamesToPlay = 100;
 
 	    for(int i = 0; i < gamesToPlay; i++) {

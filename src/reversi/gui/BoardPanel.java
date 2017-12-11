@@ -1,19 +1,21 @@
 package reversi.gui;
 
-import reversi.Board;
 import reversi.MovePosition;
 import reversi.Piece;
+import reversi.ReversiGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 public class BoardPanel extends JPanel {
     private int mWidth;
     private int mHeight;
-    private Board mBoard = null;
+    private ReversiGame mGame = null;
     private BoardPanelListener mPanelListener = null;
+    private boolean enableAvailableMoves = false;
 
     /**
      * Constructor
@@ -35,7 +37,7 @@ public class BoardPanel extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(mPanelListener != null && mBoard != null)
+                if(mPanelListener != null && mGame != null)
                     mPanelListener.boardClicked(coordinatesToMovePosition(e.getX(), e.getY()), e);
             }
 
@@ -62,14 +64,22 @@ public class BoardPanel extends JPanel {
 
     /**
      * Set the board to render
-     * @param board boad instance
+     * @param game instance
      */
-    public void setBoard(Board board) {
-        mBoard = board;
+    public void setBoard(ReversiGame game) {
+        mGame = game;
     }
 
     public void setBoardListener(BoardPanelListener listener) {
         mPanelListener = listener;
+    }
+
+    /**
+     * Enable or disable display of available moves for the next player
+     * @param flag status
+     */
+    public void enableAvailableMoves(boolean flag) {
+        enableAvailableMoves = flag;
     }
 
     /**
@@ -78,9 +88,11 @@ public class BoardPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        if(mBoard != null) {
+        if(mGame != null) {
             makeGrid(g);
             makePieces(g);
+            if(enableAvailableMoves)
+                makeAvailableMoves(g);
         } else {
             System.out.println("No board bound to BoardPanel...");
         }
@@ -90,16 +102,18 @@ public class BoardPanel extends JPanel {
      * Draw the grid
      */
     private void makeGrid(Graphics g) {
-        int rowSize = mHeight / mBoard.getRows();
-        int colSize = mWidth / mBoard.getColumns();
+        int rows = mGame.getBoard().getRows();
+        int cols = mGame.getBoard().getColumns();
+        int rowSize = mHeight / mGame.getBoard().getRows();
+        int colSize = mWidth / mGame.getBoard().getColumns();
 
         // draw lines separator
-        for(int i = 1; i <= mBoard.getColumns(); i++) {
+        for(int i = 1; i <= rows; i++) {
             g.drawLine(0, rowSize*i, mWidth, rowSize*i);
         }
 
         // draw columns separator
-        for(int i = 1; i <= mBoard.getColumns(); i++) {
+        for(int i = 1; i <= cols; i++) {
             g.drawLine(colSize*i, 0, colSize*i, mHeight);
         }
     }
@@ -108,18 +122,20 @@ public class BoardPanel extends JPanel {
      * Draw the pieces
      */
     private void makePieces(Graphics g) {
-        int rowSize = mHeight / mBoard.getRows();
-        int colSize = mWidth / mBoard.getColumns();
+        int rows = mGame.getBoard().getRows();
+        int cols = mGame.getBoard().getColumns();
+        int rowSize = mHeight / mGame.getBoard().getRows();
+        int colSize = mWidth / mGame.getBoard().getColumns();
 
         int pieceRadius = rowSize / 2;
 
         // draw lines separator
-        for(int row = 0; row < mBoard.getColumns(); row++) {
-            for(int col = 0; col < mBoard.getRows(); col++) {
+        for(int row = 0; row < cols; row++) {
+            for(int col = 0; col < rows; col++) {
                 int x = colSize * col + pieceRadius - pieceRadius/2;
                 int y = rowSize * row + pieceRadius - pieceRadius/2;
 
-                Piece p = mBoard.getPiece(row, col);
+                Piece p = mGame.getBoard().getPiece(row, col);
                 if(p != null) {
                     if(p.getColor() == Piece.Color.White) {
                         g.setColor(Color.WHITE);
@@ -137,9 +153,37 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    /**
+     * Draws the available moves
+     */
+    private void makeAvailableMoves(Graphics g) {
+        int rows = mGame.getBoard().getRows();
+        int cols = mGame.getBoard().getColumns();
+        int rowSize = mHeight / mGame.getBoard().getRows();
+        int colSize = mWidth / mGame.getBoard().getColumns();
+
+        int pieceRadius = rowSize / 2;
+
+        List<MovePosition> availableMoves = mGame.getPossibleMoves(mGame.getCurrentPlayer());
+
+        for(MovePosition move : availableMoves) {
+            int x = colSize * move.getColumn() + pieceRadius - pieceRadius/2;
+            int y = rowSize * move.getRow() + pieceRadius - pieceRadius/2;
+
+            g.setColor(Color.RED);
+            g.drawRect(x, y, 10, 10);
+        }
+    }
+
+    /**
+     * Converts mouse click position to grid coordinates
+     * @param x mouse X position
+     * @param y mouse Y position
+     * @return instance of desired mouse position
+     */
     private MovePosition coordinatesToMovePosition(int x, int y) {
-        int rowSize = mHeight / mBoard.getRows();
-        int colSize = mWidth / mBoard.getColumns();
+        int rowSize = mHeight / mGame.getBoard().getRows();
+        int colSize = mWidth / mGame.getBoard().getColumns();
 
         return new MovePosition((int) Math.floor(y / colSize), (int) Math.floor(x / rowSize));
     }
