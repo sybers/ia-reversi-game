@@ -1,6 +1,8 @@
-package reversi.players.ai.heuristics;
+package reversi.heuristics;
 
+import reversi.Board;
 import reversi.Piece;
+import reversi.PieceColor;
 import reversi.ReversiGame;
 
 import java.util.ArrayList;
@@ -12,20 +14,21 @@ public class CornersCapturedHeuristic extends AbstractHeuristic {
     public double evaluate(ReversiGame game) {
 
         List<Piece> cornerPieces = new ArrayList<>();
+        Board board = game.getBoard();
 
         // coin nord-ouest
-        cornerPieces.add(game.getPieceAt(0, 0));
+        cornerPieces.add(board.getPiece(0, 0));
 
         // coin nord-est
-        cornerPieces.add(game.getPieceAt(0, game.getColumns()));
+        cornerPieces.add(board.getPiece(0, game.getColumns()));
 
         // coin sud-est
-        cornerPieces.add(game.getPieceAt(game.getRows(), game.getColumns()));
+        cornerPieces.add(board.getPiece(game.getRows(), game.getColumns()));
 
         // coin sud-ouest
-        cornerPieces.add(game.getPieceAt(game.getRows(), 0));
+        cornerPieces.add(board.getPiece(game.getRows(), 0));
 
-        Piece.Color maxPlayerColor = game.getCurrentPlayer().getColor();
+        PieceColor maxPlayerColor = game.getCurrentPlayer().getColor();
         int maxCorners, minCorners;
         maxCorners = minCorners = 0;
 

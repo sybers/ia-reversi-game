@@ -22,8 +22,7 @@ public class StatusBar extends JLabel {
      * Constructor
      */
     public StatusBar() {
-        super(" ");
-        init();
+        this(" ");
     }
 
     /**
@@ -32,13 +31,6 @@ public class StatusBar extends JLabel {
      */
     public StatusBar(String text) {
         super(text);
-        init();
-    }
-
-    /**
-     * Initialise les styles du composant
-     */
-    private void init() {
         setForeground(StatusBar.InfoColor);
         setBackground(Color.WHITE);
         setBorder(

@@ -1,7 +1,7 @@
 package reversi.players;
 
 import reversi.MovePosition;
-import reversi.Piece;
+import reversi.PieceColor;
 import reversi.ReversiGame;
 
 public interface PlayerInterface {
@@ -22,7 +22,7 @@ public interface PlayerInterface {
      * Renvoie la couleur du joueur
      * @return color couleur courante
      */
-    Piece.Color getColor();
+    PieceColor getColor();
 
     /**
      * Méthode appelée lorsque le joueur doit jouer son tour

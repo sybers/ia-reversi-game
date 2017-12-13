@@ -4,14 +4,14 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import reversi.MovePosition;
-import reversi.Piece;
+import reversi.PieceColor;
 import reversi.ReversiGame;
 import reversi.players.AIPlayer;
 import reversi.players.ConsolePlayer;
 import reversi.players.PlayerInterface;
-import reversi.players.ai.heuristics.CompositeHeurstic;
-import reversi.players.ai.heuristics.MaximiseScoreHeuristic;
-import reversi.players.ai.heuristics.MobilityHeuristic;
+import reversi.heuristics.CompositeHeurstic;
+import reversi.heuristics.MaximiseScoreHeuristic;
+import reversi.heuristics.MobilityHeuristic;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -140,13 +140,13 @@ public class GameWindow {
         mPlayer1 = createPlayer(
             String.valueOf(mPlayer1Type.getSelectedItem()),
             String.valueOf(mPlayer1Difficulty.getSelectedItem()),
-            Piece.Color.White
+            PieceColor.White
         );
 
         mPlayer2 = createPlayer(
             String.valueOf(mPlayer2Type.getSelectedItem()),
             String.valueOf(mPlayer2Difficulty.getSelectedItem()),
-            Piece.Color.Black
+            PieceColor.Black
         );
 
         mGame = new ReversiGame(mPlayer1, mPlayer2);
@@ -171,7 +171,7 @@ public class GameWindow {
      * @param difficulty "Easy", "Medium" or "Hard"
      * @return New player instance
      */
-    private PlayerInterface createPlayer(String type, String difficulty, Piece.Color c) {
+    private PlayerInterface createPlayer(String type, String difficulty, PieceColor c) {
         switch (type) {
             case "Human":
                 return new ConsolePlayer(c);

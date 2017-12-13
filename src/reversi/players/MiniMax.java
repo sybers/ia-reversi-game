@@ -1,8 +1,8 @@
-package reversi.players.ai;
+package reversi.players;
 
 import reversi.MovePosition;
 import reversi.ReversiGame;
-import reversi.players.ai.heuristics.AbstractHeuristic;
+import reversi.heuristics.AbstractHeuristic;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public final class MiniMax {
     /**
      * Active l'élagage alpha-beta pour l'exploration des solutions
      */
-    public void enableAlphaBete() {
+    public void enableAlphaBeta() {
         mUseAlphaBeta = true;
     }
 
@@ -33,16 +33,11 @@ public final class MiniMax {
         if(game == null)
             throw new IllegalArgumentException("game cannot be null");
 
-        //System.out.println("----------");
-        //System.out.println("Début de l'exploration min/max");
-
         double maxScore = Double.NEGATIVE_INFINITY;
         MovePosition bestMove = null;
 
         List<MovePosition> moves = game.getPossibleMoves(game.getCurrentPlayer());
         ReversiGame virtualGame;
-
-        //System.out.println("Il y a " + moves.size() + " coups disponibles à partir de l'état de base.");
 
         for(MovePosition pos : moves) {
 
@@ -53,8 +48,6 @@ public final class MiniMax {
 
             double score = min(virtualGame, depth - 1);
 
-            // System.out.println("Score du coup : " + pos.toString() + " -> " + score);
-
             if(score > maxScore || score == maxScore && Math.random() > 0.5) {
                 maxScore = score;
                 bestMove = pos;
@@ -62,11 +55,7 @@ public final class MiniMax {
 
         }
 
-        //System.out.println("Fin de l'explortation min/max, meilleur coup -> " + bestMove + ", score -> " + maxScore);
-        //System.out.println("----------\n");
-
         return bestMove;
-
     }
 
     /**

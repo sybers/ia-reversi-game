@@ -2,6 +2,7 @@ package reversi.players;
 
 import reversi.MovePosition;
 import reversi.Piece;
+import reversi.PieceColor;
 import reversi.ReversiGame;
 import java.util.Scanner;
 
@@ -13,14 +14,14 @@ public class ConsolePlayer implements PlayerInterface {
     private final Scanner mScanner = new Scanner(System.in);
 
     private int mScore;
-    private Piece.Color mColor;
+    private PieceColor mColor;
 
     /**
      * Créer un joueur avec un score initialisé à 0
      *
      * @param c Couleur du joueur
      */
-    public ConsolePlayer(Piece.Color c) {
+    public ConsolePlayer(PieceColor c) {
         mColor = c;
     }
 
@@ -51,7 +52,7 @@ public class ConsolePlayer implements PlayerInterface {
     }
 
     @Override
-    public Piece.Color getColor() {
+    public PieceColor getColor() {
         return mColor;
     }
 

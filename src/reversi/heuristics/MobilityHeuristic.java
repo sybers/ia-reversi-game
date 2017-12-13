@@ -1,6 +1,5 @@
-package reversi.players.ai.heuristics;
+package reversi.heuristics;
 
-import reversi.Piece;
 import reversi.ReversiGame;
 
 public class MobilityHeuristic extends AbstractHeuristic {

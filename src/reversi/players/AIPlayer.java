@@ -1,21 +1,20 @@
 package reversi.players;
 
 import reversi.MovePosition;
-import reversi.Piece;
+import reversi.PieceColor;
 import reversi.ReversiGame;
 
-import reversi.players.ai.MiniMax;
-import reversi.players.ai.heuristics.AbstractHeuristic;
+import reversi.heuristics.AbstractHeuristic;
 
 public class AIPlayer implements PlayerInterface {
 
-    protected int mScore = 0;
-    protected Piece.Color mColor;
+    private int mScore = 0;
+    private PieceColor mColor;
 
     private AbstractHeuristic mHeuristic;
-    private int mDepth = 3;
+    private int mDepth;
 
-    public AIPlayer(Piece.Color c, AbstractHeuristic heuristic, int depth) {
+    public AIPlayer(PieceColor c, AbstractHeuristic heuristic, int depth) {
         if(heuristic == null)
             throw new IllegalArgumentException("Heuristic cannot be null value");
 
@@ -38,7 +37,7 @@ public class AIPlayer implements PlayerInterface {
     }
 
     @Override
-    public Piece.Color getColor() {
+    public PieceColor getColor() {
         return mColor;
     }
 

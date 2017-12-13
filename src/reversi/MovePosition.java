@@ -7,7 +7,7 @@ package reversi;
 public class MovePosition {
 	private int row;
 	private int column;
-	
+
 	public MovePosition(int row, int column) {
 		this.setRow(row);
 		this.setColumn(column);

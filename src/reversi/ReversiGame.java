@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Game
+ * ReversiGame
  * Classe gérant la logique du jeu
  */
 public final class ReversiGame {
@@ -73,7 +73,8 @@ public final class ReversiGame {
 
 	/**
 	 * Initialize le plateau avec les pièces de départ
-	 * et attribue les scores correspondants aux deux joueurs
+	 * et attribue les scores correspondants aux deux joueurs.
+     * Vous devez appeler cette fonction avant de lancer une partie.
 	 */
 	public void init() {
 		int middleRow = (int) Math.ceil(mBoard.getRows()/2);
@@ -117,6 +118,14 @@ public final class ReversiGame {
 	    return mBoard.getColumns();
     }
 
+    /**
+     * Renvoie une copie du plateau de jeu courant
+     * @return Copie du plateau de jeu
+     */
+    public Board getBoard() {
+        return mBoard;
+    }
+
 	/**
 	 * Renvoie la couleur des pièces du joueur dont c'est le tour
 	 * @return
@@ -154,8 +163,8 @@ public final class ReversiGame {
     /**
      * Joue le coup suivant pour le joueur dont c'est le tour
      */
-	public void play() {
-	    play(null);
+	public String play() {
+	    return play(null);
     }
 
     /**
@@ -191,15 +200,41 @@ public final class ReversiGame {
         return PLAYER_PLAYED;
 	}
 
-	/**
-	 * Retourne la pièce à la position demandée
-	 * @param row ligne
-	 * @param col colonne
-	 * @return Instance de la pièce
-	 */
-	public Piece getPieceAt(int row, int col) {
-		return mBoard.getPiece(row, col);
-	}
+    public String toCSV() {
+        String winnerPlayer;
+        if(mWhitePlayer.getScore() > mBlackPlayer.getScore())
+            winnerPlayer = "white";
+        else if(mWhitePlayer.getScore() < mBlackPlayer.getScore())
+            winnerPlayer = "black";
+        else
+            winnerPlayer = "draw";
+
+        return winnerPlayer + ";" + mWhitePlayer.getScore() + ";" + mBlackPlayer.getScore();
+    }
+
+    /**
+     * Copie de l'objet
+     * @return une copie de l'objet
+     */
+    public ReversiGame copy() {
+        ReversiGame other = new ReversiGame(mWhitePlayer.copy(), mBlackPlayer.copy());
+        other.mIsBlackTurn = mIsBlackTurn;
+        other.mIsGameOver = mIsGameOver;
+        other.mNextPossibleMoves = new ArrayList<>(mNextPossibleMoves);
+        other.mBoard = mBoard.copy();
+
+        return other;
+    }
+
+    /**
+     * Affiche le plateau et l'état courant du jeu
+     */
+    @Override
+    public String toString() {
+        return "   Tour du joueur " + (mIsBlackTurn ? "Noir" : "Blanc") + "\n" +
+            "Blanc -> " + mWhitePlayer.getScore() + " | Noir -> " + mBlackPlayer.getScore() + "\n" +
+            mBoard.toString();
+    }
 
 	/**
 	 * Effectue un mouvement à la position donnée sur le plateau
@@ -336,14 +371,6 @@ public final class ReversiGame {
 		return isValid;
 	}
 
-    /**
-     * Renvoie une copie du plateau de jeu courant
-     * @return Copie du plateau de jeu
-     */
-	public Board getBoard() {
-	    return mBoard;
-    }
-
 	/**
 	 * Mets à jour les points des joueurs (appelée après un mouvement)
 	 */
@@ -373,41 +400,5 @@ public final class ReversiGame {
 	 */
 	private void switchPlayers() {
 		mIsBlackTurn = !mIsBlackTurn;
-	}
-
-	public String gameStateToCSV() {
-	    String winnerPlayer;
-	    if(mWhitePlayer.getScore() > mBlackPlayer.getScore())
-	        winnerPlayer = "white";
-	    else if(mWhitePlayer.getScore() < mBlackPlayer.getScore())
-	        winnerPlayer = "black";
-	    else
-	        winnerPlayer = "draw";
-
-	    return winnerPlayer + ";" + mWhitePlayer.getScore() + ";" + mBlackPlayer.getScore();
-    }
-
-	/**
-	 * Copie de l'objet
-	 * @return une copie de l'objet
-	 */
-	public ReversiGame copy() {
-		ReversiGame other = new ReversiGame(mWhitePlayer.copy(), mBlackPlayer.copy());
-		other.mIsBlackTurn = mIsBlackTurn;
-		other.mIsGameOver = mIsGameOver;
-		other.mNextPossibleMoves = new ArrayList<>(mNextPossibleMoves);
-		other.mBoard = mBoard.copy();
-
-		return other;
-	}
-
-	/**
-	 * Affiche le plateau et l'état courant du jeu
-	 */
-	@Override
-	public String toString() {
-		return "   Tour du joueur " + (mIsBlackTurn ? "Noir" : "Blanc") + "\n" +
-				"Blanc -> " + mWhitePlayer.getScore() + " | Noir -> " + mBlackPlayer.getScore() + "\n" +
-				mBoard.toString();
 	}
 }

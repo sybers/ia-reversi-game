@@ -2,6 +2,7 @@ package reversi.gui;
 
 import reversi.MovePosition;
 import reversi.Piece;
+import reversi.PieceColor;
 import reversi.ReversiGame;
 
 import javax.swing.*;
@@ -137,7 +138,7 @@ public class BoardPanel extends JPanel {
 
                 Piece p = mGame.getBoard().getPiece(row, col);
                 if(p != null) {
-                    if(p.getColor() == Piece.Color.White) {
+                    if(p.getColor() == PieceColor.White) {
                         g.setColor(Color.WHITE);
                         g.fillOval(x, y, pieceRadius, pieceRadius);
                     }
