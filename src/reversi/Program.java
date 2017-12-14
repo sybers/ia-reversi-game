@@ -30,7 +30,7 @@ public class Program {
 
             // play until the game is over
             while(!g.isGameOver()) {
-                g.play();
+                g.play(g.getCurrentPlayer().playTurn(g));
             }
 
             System.out.println(g.toCSV());
