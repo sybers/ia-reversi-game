@@ -58,7 +58,7 @@ public final class ReversiGame {
 		if(rows <= 0 || columns <= 0)
             throw new IllegalArgumentException("rows and columns cannot be negative or zero");
 
-		if(player1.getColor() == Piece.Color.White) {
+		if(player1.getColor() == PieceColor.White) {
 			mWhitePlayer = player1;
 			mBlackPlayer = player2;
 		} else {
@@ -81,12 +81,12 @@ public final class ReversiGame {
 		int middleColumn = (int) Math.ceil(mBoard.getColumns()/2);
 
 		// pièces du joueur blanc
-		this.mBoard.addPiece(middleRow - 1, middleColumn - 1, Piece.Color.White);
-		this.mBoard.addPiece(middleRow    , middleColumn	   , Piece.Color.White);
+		this.mBoard.addPiece(middleRow - 1, middleColumn - 1, PieceColor.White);
+		this.mBoard.addPiece(middleRow    , middleColumn	   , PieceColor.White);
 
 		// pièces du joueur noir
-		this.mBoard.addPiece(middleRow - 1, middleColumn    , Piece.Color.Black);
-		this.mBoard.addPiece(middleRow    , middleColumn - 1, Piece.Color.Black);
+		this.mBoard.addPiece(middleRow - 1, middleColumn    , PieceColor.Black);
+		this.mBoard.addPiece(middleRow    , middleColumn - 1, PieceColor.Black);
 
 		// score initial des deux joueurs
 		mWhitePlayer.setScore(2);
@@ -148,7 +148,7 @@ public final class ReversiGame {
 	 */
 	public List<MovePosition> getPossibleMoves(PlayerInterface player) {
 		List<MovePosition> possibleMoves = new ArrayList<>();
-		Piece.Color c = player.getColor();
+		PieceColor c = player.getColor();
 
 		for(int i = 0; i < mBoard.getRows(); i++) {
 			for(int j = 0; j < mBoard.getColumns(); j++) {
@@ -307,7 +307,7 @@ public final class ReversiGame {
 	 * @param color Couleur de la pièce à poser
 	 * @return Vrai si le coup est valide, faux sinon
 	 */
-	private boolean isPossibleMove(MovePosition position, Piece.Color color) {
+	private boolean isPossibleMove(MovePosition position, PieceColor color) {
 		if(position == null)
 			return false;
 
@@ -321,7 +321,7 @@ public final class ReversiGame {
 	 * @param color couleur de la pièce à poser
 	 * @return boolean vrai si le mouvement est possible, faux sinon
 	 */
-	private boolean isPossibleMove(int row, int column, Piece.Color color) {
+	private boolean isPossibleMove(int row, int column, PieceColor color) {
 
 		boolean isValid = false;
 
@@ -382,7 +382,7 @@ public final class ReversiGame {
 			for(int j = 0; j < mBoard.getColumns(); j++) {
 				Piece p = mBoard.getPiece(i, j);
 				if(p != null) {
-					if(p.getColor() == Piece.Color.Black)
+					if(p.getColor() == PieceColor.Black)
 						blackScore++;
 					else
 						whitescore++;
