@@ -45,11 +45,7 @@ public class AIPlayer implements PlayerInterface {
     public MovePosition playTurn(ReversiGame game) {
 
         MiniMax minimax = new MiniMax(mHeuristic);
-
-        // long startTime = System.currentTimeMillis();
-        // long endTime = System.currentTimeMillis();
-        // System.out.println("Total execution time: " + (endTime-startTime) + "ms");
-
+        minimax.enableAlphaBeta();
         return minimax.explore(game, mDepth);
     }
 

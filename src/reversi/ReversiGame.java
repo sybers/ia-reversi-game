@@ -209,7 +209,7 @@ public final class ReversiGame {
         else
             winnerPlayer = "draw";
 
-        return winnerPlayer + ";" + mWhitePlayer.getScore() + ";" + mBlackPlayer.getScore();
+        return winnerPlayer;
     }
 
     /**

@@ -21,17 +21,20 @@ public class Program {
             compositeHeurstic.addHeuristic(new MobilityHeuristic(), 78.922);
             compositeHeurstic.addHeuristic(new CornersCapturedHeuristic(), 801.724);
 
-            PlayerInterface whitePlayer = new AIPlayer(PieceColor.White, new MobilityHeuristic(), 2);
-            PlayerInterface blackPlayer = new AIPlayer(PieceColor.Black, compositeHeurstic, 2);
+            PlayerInterface whitePlayer = new AIPlayer(PieceColor.White, compositeHeurstic, 1);
+            PlayerInterface blackPlayer = new AIPlayer(PieceColor.Black, compositeHeurstic, 5);
 
             ReversiGame g = new ReversiGame(whitePlayer, blackPlayer);
 
             g.init();
 
+            //long startTime = System.nanoTime();
             // play until the game is over
             while(!g.isGameOver()) {
                 g.play(g.getCurrentPlayer().playTurn(g));
             }
+
+            //long estimatedTime = (System.nanoTime() - startTime) / 1000000;
 
             System.out.println(g.toCSV());
         }

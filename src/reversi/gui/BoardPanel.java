@@ -168,11 +168,11 @@ public class BoardPanel extends JPanel {
         List<MovePosition> availableMoves = mGame.getPossibleMoves(mGame.getCurrentPlayer());
 
         for(MovePosition move : availableMoves) {
-            int x = colSize * move.getColumn() + pieceRadius - pieceRadius/2;
-            int y = rowSize * move.getRow() + pieceRadius - pieceRadius/2;
+            int x = colSize * move.getColumn() + pieceRadius - pieceRadius/8;
+            int y = rowSize * move.getRow() + pieceRadius - pieceRadius/8;
 
             g.setColor(Color.RED);
-            g.drawRect(x, y, 10, 10);
+            g.drawRect(x, y, pieceRadius/4, pieceRadius/4);
         }
     }
 
