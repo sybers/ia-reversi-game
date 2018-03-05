@@ -10,7 +10,7 @@ import reversi.heuristics.MobilityHeuristic;
 public class Program {
 
 	public static void main(String[] args) {
-	    int gamesToPlay = 100;
+	    int gamesToPlay = 1;
 
 	    for(int i = 0; i < gamesToPlay; i++) {
             //AbstractPlayer whitePlayer = new HumanPlayer(Piece.Color.White);
@@ -36,7 +36,7 @@ public class Program {
 
             //long estimatedTime = (System.nanoTime() - startTime) / 1000000;
 
-            System.out.println(g.toCSV());
+            System.out.println(g.toString());
         }
 	}
 }

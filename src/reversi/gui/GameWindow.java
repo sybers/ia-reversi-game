@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.Spacer;
 import reversi.MovePosition;
 import reversi.PieceColor;
 import reversi.ReversiGame;
+import reversi.heuristics.CornersCapturedHeuristic;
 import reversi.players.AIPlayer;
 import reversi.players.ConsolePlayer;
 import reversi.players.PlayerInterface;
@@ -189,7 +190,9 @@ public class GameWindow {
                     case "Hard":
                     default:
                         CompositeHeurstic hardHeuristic = new CompositeHeurstic();
-                        hardHeuristic.addHeuristic(new MobilityHeuristic(), 10);
+                        hardHeuristic.addHeuristic(new MaximiseScoreHeuristic(), 10);
+                        hardHeuristic.addHeuristic(new MobilityHeuristic(), 78.922);
+                        hardHeuristic.addHeuristic(new CornersCapturedHeuristic(), 801.724);
                         return new AIPlayer(c, hardHeuristic, 4);
                 }
 
