@@ -1,2 +1,3 @@
-# ia-reversi-game
-Implémentation Java du jeu Reversi/Othello avec intelligence artificielle
+# reversi-desktop
+
+Java implementation of the famous Reversi game with AI.
